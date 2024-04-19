@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crud-angular-spring": {
+    "crud-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/crud-angular-spring",
+            "outputPath": "dist/crud-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "crud-angular-spring:build:production"
+              "buildTarget": "crud-angular:build:production"
             },
             "development": {
-              "buildTarget": "crud-angular-spring:build:development"
+              "buildTarget": "crud-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "crud-angular-spring:build"
+            "buildTarget": "crud-angular:build"
           }
         },
         "test": {
@@ -97,5 +97,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f9b1caf5-bdc2-4477-962a-827027a5d00b"
   }
 }
