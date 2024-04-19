@@ -1,4 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$deep-purple-palette, 400, 200, 700, 500);
+$my-accent: mat.define-palette(mat.$purple-palette, 400, 200, 700, 600);
+$my-warn: mat.define-palette(mat.$pink-palette);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+@include mat.all-component-themes($my-theme);
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
