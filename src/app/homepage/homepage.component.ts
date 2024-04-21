@@ -10,9 +10,9 @@ import { CoursesService } from './services/courses.service';
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [],
+  imports: [MatTableModule, MatCardModule, MatToolbarModule],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss'
+  styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent {
   displayedColumns: string[] = ['name', 'category'];
