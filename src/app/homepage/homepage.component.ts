@@ -2,14 +2,16 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Observable, catchError, of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 
 import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
 import { Course } from './model/course';
 import { CoursesService } from './services/courses.service';
+import { CategoryPipe } from '../shared/pipes/category.pipe';
 
 @Component({
   selector: 'app-homepage',
@@ -20,6 +22,8 @@ import { CoursesService } from './services/courses.service';
     MatToolbarModule,
     MatProgressSpinnerModule,
     AsyncPipe,
+    MatIconModule,
+    CategoryPipe
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
