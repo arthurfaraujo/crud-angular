@@ -14,7 +14,7 @@ import { CoursesService } from './services/courses.service';
 import { CategoryPipe } from '../shared/pipes/category.pipe';
 
 @Component({
-  selector: 'app-homepage',
+  selector: 'app-courses',
   standalone: true,
   imports: [
     MatTableModule,
@@ -25,10 +25,10 @@ import { CategoryPipe } from '../shared/pipes/category.pipe';
     MatIconModule,
     CategoryPipe
   ],
-  templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss',
+  templateUrl: './courses.component.html',
+  styleUrl: './courses.component.scss',
 })
-export class HomepageComponent {
+export class CoursesComponent {
   displayedColumns: string[] = ['name', 'category'];
   courses$: Observable<Course[]>;
 
