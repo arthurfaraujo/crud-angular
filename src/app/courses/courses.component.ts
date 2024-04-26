@@ -12,6 +12,7 @@ import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.compon
 import { Course } from './model/course';
 import { CoursesService } from './services/courses.service';
 import { CategoryPipe } from '../shared/pipes/category.pipe';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-courses',
@@ -21,6 +22,7 @@ import { CategoryPipe } from '../shared/pipes/category.pipe';
     MatCardModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
     AsyncPipe,
     MatIconModule,
     CategoryPipe
@@ -29,7 +31,7 @@ import { CategoryPipe } from '../shared/pipes/category.pipe';
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
-  displayedColumns: string[] = ['name', 'category'];
+  displayedColumns: string[] = ['name', 'category', 'actions'];
   courses$: Observable<Course[]>;
 
   constructor(
