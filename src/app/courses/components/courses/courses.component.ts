@@ -8,10 +8,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { catchError, Observable, of } from 'rxjs';
 
-import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
-import { Course } from './model/course';
-import { CoursesService } from './services/courses.service';
-import { CategoryPipe } from '../shared/pipes/category.pipe';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
+import { Course } from '../../model/course';
+import { CoursesService } from '../../services/courses.service';
+import { CategoryPipe } from '../../../shared/pipes/category.pipe';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -25,7 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     AsyncPipe,
     MatIconModule,
-    CategoryPipe
+    CategoryPipe,
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
