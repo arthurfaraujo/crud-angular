@@ -3,9 +3,11 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./courses/courses.component').then(
-        (mod) => mod.CoursesComponent
-      ),
+    pathMatch: 'full',
+    redirectTo: 'courses'
+  },
+  {
+    path: 'courses',
+    loadChildren: () => import('./courses/courses.routes').then(m => m.COURSES_ROUTES)
   }
 ];
