@@ -19,4 +19,8 @@ export class CoursesService {
       // tap((courses) => console.log(courses))
     );
   }
+
+  createCourse(course: Course) {
+    return this.httpClient.post<Course>(this.API, course);
+  }
 }
