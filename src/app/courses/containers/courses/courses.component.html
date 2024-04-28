@@ -1,0 +1,17 @@
+  <mat-card class="max-w-[80%] my-[2rem] mx-auto">
+  <mat-card-content>
+    <mat-toolbar color="primary" class="min-width">
+      <span>Courses List</span>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z4 flex flex-col min-width">
+      @if (courses$ | async; as courses) {
+      <app-courses-list [courses]="courses" (add)="onAdd()"></app-courses-list>
+      } @else {
+      <div class="flex justify-center p-6">
+        <mat-spinner diameter="95" class=""></mat-spinner>
+      </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

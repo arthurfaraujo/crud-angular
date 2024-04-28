@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { CoursesComponent } from './components/courses/courses.component';
+import { CoursesComponent } from './containers/courses/courses.component';
 
 export const COURSES_ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./components/courses/courses.component').then(
+      import('./containers/courses/courses.component').then(
         (m) => m.CoursesComponent
       ),
   },
@@ -17,5 +17,5 @@ export const COURSES_ROUTES: Routes = [
       import('./components/courses-form/courses-form.component').then(
         (m) => m.CoursesFormComponent
       ),
-  }
+  },
 ];
