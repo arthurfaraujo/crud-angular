@@ -13,6 +13,7 @@ import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -36,7 +37,9 @@ export class CoursesComponent {
 
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.courses$ = this.coursesService.getAllCourses().pipe(
       catchError(() => {
@@ -50,5 +53,10 @@ export class CoursesComponent {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg,
     });
+  }
+
+  onAdd() {
+    console.log(this.route);
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 }
