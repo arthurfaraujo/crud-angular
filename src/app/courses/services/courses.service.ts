@@ -14,13 +14,13 @@ export class CoursesService {
 
   getAllCourses() {
     return this.httpClient.get<Course[]>(this.API).pipe(
-      first()
+      first(),
       // delay(5000),
       // tap((courses) => console.log(courses))
     );
   }
 
-  createCourse(course: Course) {
+  createCourse(course: Partial<Course>) {
     return this.httpClient.post<Course>(this.API, course);
   }
 
