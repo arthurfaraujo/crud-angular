@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
 
@@ -23,7 +25,7 @@ import { CoursesService } from '../../services/courses.service';
     MatToolbarModule,
     MatButtonModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './courses-form.component.html',
   styleUrl: './courses-form.component.scss',
@@ -34,7 +36,9 @@ export class CoursesFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private service: CoursesService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private location: Location
   ) {
     this.form = this.formBuilder.group({
       _id: [undefined],
@@ -44,21 +48,24 @@ export class CoursesFormComponent {
   }
 
   onSubmit() {
-    this.service.createCourse(this.form.value).subscribe(
-      {
-        next: () => this.onSuccess(),
-        error: () => this.onError()
-      }
-    );
+    this.service.createCourse(this.form.value).subscribe({
+      next: () => this.onSuccess(),
+      error: () => this.onError(),
+    });
   }
 
-  onCancel() {}
+  onCancel() {
+    this.location.back();
+  }
 
   private onError() {
-    this.snackBar.open('There was an error...', 'Close', {duration: 3000})
+    this.snackBar.open('There was an error...', 'Close', { duration: 3000 });
   }
 
   private onSuccess() {
-    this.snackBar.open('Course created successfully!', 'Close', {duration: 3000})
+    this.router.navigate(['']);
+    this.snackBar.open('Course created successfully!', 'Close', {
+      duration: 3000,
+    });
   }
 }
