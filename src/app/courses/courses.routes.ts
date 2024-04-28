@@ -10,4 +10,12 @@ export const COURSES_ROUTES: Routes = [
         (m) => m.CoursesComponent
       ),
   },
+  {
+    path: 'new',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./components/courses-form/courses-form.component').then(
+        (m) => m.CoursesFormComponent
+      ),
+  }
 ];
