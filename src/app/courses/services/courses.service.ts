@@ -23,4 +23,8 @@ export class CoursesService {
   createCourse(course: Course) {
     return this.httpClient.post<Course>(this.API, course);
   }
+
+  deleteCourse(id: number) {
+    return this.httpClient.delete(`${this.API}/${id}`);
+  }
 }
