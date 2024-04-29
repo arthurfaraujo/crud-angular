@@ -9,9 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
+import { Course } from '../../model/course';
 
 @Component({
   selector: 'app-courses-form',
@@ -20,7 +21,6 @@ import { CoursesService } from '../../services/courses.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule,
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
@@ -32,6 +32,7 @@ import { CoursesService } from '../../services/courses.service';
 })
 export class CoursesFormComponent {
   form = this.formBuilder.group({
+    _id: [''],
     name: [''],
     category: [''],
   });
@@ -41,11 +42,15 @@ export class CoursesFormComponent {
     private service: CoursesService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location,
+    private route: ActivatedRoute
+  ) {
+    const course: Course = this.route.snapshot.data['course'];
+    this.form.setValue(course);
+  }
 
   onSubmit() {
-    this.service.createCourse(this.form.value).subscribe({
+    this.service.save(this.form.value).subscribe({
       next: () => this.onSuccess(),
       error: () => this.onError(),
     });
@@ -61,7 +66,7 @@ export class CoursesFormComponent {
 
   private onSuccess() {
     this.router.navigate(['']);
-    this.snackBar.open('Course created successfully!', 'Close', {
+    this.snackBar.open('Course saved successfully!', 'Close', {
       duration: 3000,
     });
   }
