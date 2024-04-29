@@ -40,10 +40,10 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let course" class="action-column">
-      <button mat-icon-button color="accent" aria-label="Edit button" (click)="onEdit(course)">
+      <button mat-icon-button color="accent" aria-label="Edit button" (click)="onEdit(course._id)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Delete button">
+      <button mat-icon-button color="warn" aria-label="Delete button" (click)="onDelete(course._id)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

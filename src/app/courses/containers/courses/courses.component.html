@@ -6,7 +6,7 @@
 
     <div class="mat-elevation-z4 flex flex-col min-width">
       @if (courses$ | async; as courses) {
-      <app-courses-list [courses]="courses" (add)="onAdd()" (edit)="onEdit($event)"></app-courses-list>
+      <app-courses-list [courses]="courses" (add)="onAdd()" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-courses-list>
       } @else {
       <div class="flex justify-center p-6">
         <mat-spinner diameter="95" class=""></mat-spinner>
