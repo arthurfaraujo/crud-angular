@@ -63,6 +63,10 @@ export class CoursesComponent {
     });
   }
 
+  onEdit(id: string) {
+    this.router.navigate(['edit', id], { relativeTo: this.route });
+  }
+
   private onDeleteError() {
     this.snackBar.open('There was an error...', 'Close', { duration: 3000 });
   }
