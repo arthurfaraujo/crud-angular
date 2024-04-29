@@ -37,7 +37,7 @@ export class CoursesComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.courses$ = this.coursesService.getAllCourses().pipe(
+    this.courses$ = this.coursesService.getAll().pipe(
       catchError(() => {
         this.onError('There was an error when getting the courses...');
         return of([]);
@@ -57,7 +57,7 @@ export class CoursesComponent {
   }
 
   onDelete(id: number) {
-    this.coursesService.deleteCourse(id).subscribe({
+    this.coursesService.delete(id).subscribe({
       next: () => this.onSuccess(),
       error: () => this.onDeleteError(),
     });
