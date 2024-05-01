@@ -4,31 +4,40 @@
       <span>Course details</span>
     </mat-toolbar>
 
-    <form [formGroup]="form" class="w-full min-w-[150px] my-4">
+    <form
+      [formGroup]="form"
+      class="w-full min-w-[150px] my-4 flex flex-wrap gap-3"
+    >
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Course name</mat-label>
         <input
           matInput
           placeholder="Angular Crash Course"
           formControlName="name"
+          #name
         />
+        <mat-hint align="end">{{ name.value.length }}/150</mat-hint>
+        @if (form.get('name')?.invalid) {
+        <mat-error>{{ getErrorMessage("name") }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Course category</mat-label>
         <mat-select formControlName="category">
-          <mat-option value="null">--</mat-option>
+          <!-- <mat-option value="null" disabled></mat-option> -->
           <mat-option value="back-end">Back-end</mat-option>
           <mat-option value="front-end">Front-end</mat-option>
         </mat-select>
+        @if (form.get('category')?.invalid) {
+        <mat-error>{{ getErrorMessage("category") }}</mat-error>
+        }
       </mat-form-field>
     </form>
   </mat-card-content>
 
   <mat-card-actions class="w-full flex justify-end gap-4">
-    <button mat-raised-button color="primary" (click)="onSubmit()">
-      Save
-    </button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
     <button mat-raised-button (click)="onCancel()">Cancel</button>
   </mat-card-actions>
 </mat-card>

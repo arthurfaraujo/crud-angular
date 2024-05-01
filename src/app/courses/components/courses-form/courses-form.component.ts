@@ -1,6 +1,10 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,8 +39,11 @@ import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.
 export class CoursesFormComponent {
   form = this.formBuilder.group({
     _id: [''],
-    name: [''],
-    category: [''],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(150)],
+    ],
+    category: ['', [Validators.required]],
   });
 
   constructor(
@@ -63,8 +70,30 @@ export class CoursesFormComponent {
     this.location.back();
   }
 
+  getErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+
+    if (field?.hasError('required')) {
+      return 'Required field'
+    }
+
+    if (field?.hasError('minlength')) {
+      const requiredLength = field.errors ? field.errors['minlength']['requiredLength'] : 3
+      return `${requiredLength} characters at least`
+    }
+
+    if (field?.hasError('maxlength')) {
+      const requiredLength = field.errors ? field.errors['maxlength']['requiredLength'] : 200
+      return `Exceeded the limit of ${requiredLength} characters`
+    }
+
+    return 'Invalid field'
+  }
+
   private onError() {
-    this.dialog.open(ErrorDialogComponent, {data: 'There was an error when saving the course...'});
+    this.dialog.open(ErrorDialogComponent, {
+      data: 'There was an error when saving the course...',
+    });
   }
 
   private onSuccess() {
