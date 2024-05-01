@@ -28,7 +28,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
-  courses$: Observable<Course[]>;
+  courses$: Observable<Course[]> | null = null;
 
   constructor(
     private coursesService: CoursesService,
@@ -37,6 +37,10 @@ export class CoursesComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.refresh();
+  }
+
+  private refresh() {
     this.courses$ = this.coursesService.getAll().pipe(
       catchError(() => {
         this.onError('There was an error when getting the courses...');
@@ -59,17 +63,18 @@ export class CoursesComponent {
   onDelete(id: number) {
     this.coursesService.delete(id).subscribe({
       next: () => this.onSuccess(),
-      error: () => this.onDeleteError(),
+      error: () => this.onError('There was an error deleting the course...'),
     });
+    this.refresh();
   }
 
   onEdit(id: string) {
     this.router.navigate(['edit', id], { relativeTo: this.route });
   }
 
-  private onDeleteError() {
-    this.snackBar.open('There was an error...', 'Close', { duration: 3000 });
-  }
+  /* private onDeleteError() {
+    this.snackBar.open('There was an error deleting the course...', 'Close', { duration: 3000 });
+  } */
 
   private onSuccess() {
     this.snackBar.open('Course deleted successfully!', 'Close', {
