@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../model/course';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-courses-form',
@@ -41,6 +43,7 @@ export class CoursesFormComponent {
     private formBuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private router: Router,
     private location: Location,
     private route: ActivatedRoute
@@ -61,7 +64,7 @@ export class CoursesFormComponent {
   }
 
   private onError() {
-    this.snackBar.open('There was an error...', 'Close', { duration: 3000 });
+    this.dialog.open(ErrorDialogComponent, {data: 'There was an error when saving the course...'});
   }
 
   private onSuccess() {
