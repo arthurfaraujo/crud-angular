@@ -5,13 +5,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, first, Observable, of } from 'rxjs';
 
 import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { CoursesListComponent } from '../../components/courses-list/courses-list.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-courses',
@@ -60,12 +61,26 @@ export class CoursesComponent {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  onDelete(id: number) {
+  onDelete(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Are you sure you want to delete this course?',
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.delete(id);
+      }
+    });
+  }
+
+  private delete(id: number) {
     this.coursesService.delete(id).subscribe({
-      next: () => this.onSuccess(),
+      next: () => {
+        this.onSuccess();
+        this.refresh();
+      },
       error: () => this.onError('There was an error deleting the course...'),
     });
-    this.refresh();
   }
 
   onEdit(id: string) {
