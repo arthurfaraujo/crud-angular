@@ -25,8 +25,7 @@
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Course category</mat-label>
         <mat-select formControlName="category">
-          <!-- <mat-option value="null" disabled></mat-option> -->
-          <mat-option value="back-end">Back-end</mat-option>
+          <mat-option value="back-end">Back-end</mat-option>  
           <mat-option value="front-end">Front-end</mat-option>
         </mat-select>
         @if (form.get('category')?.invalid) {
