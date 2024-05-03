@@ -4,10 +4,11 @@ mat-table {
 }
 
 .action-column {
-  flex: 0 0 fit-content;
+  min-width: fit-content;
+  display: flex;
+  justify-content: center;
 }
 
 .action-column-header {
-  flex: 0 0 136px;
-  justify-content: center;
+  margin: 0 auto;
 }
