@@ -57,7 +57,6 @@ export class CoursesComponent {
   }
 
   onAdd() {
-    // console.log(this.route);
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 

@@ -8,7 +8,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../model/course';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component'; 
 
 @Component({
   selector: 'app-courses-form',
@@ -56,6 +55,7 @@ export class CoursesFormComponent {
     private route: ActivatedRoute
   ) {
     const course: Course = this.route.snapshot.data['course'];
+    console.log(course)
     this.form.setValue(course);
   }
 

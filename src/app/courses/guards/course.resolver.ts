@@ -7,11 +7,11 @@ import { CoursesService } from '../services/courses.service';
 
 export const courseResolver: ResolveFn<Course> = (route, state): Observable<Course> => {
 
-  if (route.params && route.params['id']) {
+  if (route.params?.['id']) {
     const service = inject(CoursesService);
 
     return service.getById(route.params['id'])
   }
 
-  return of({_id: '', name: '', category: ''});
+  return of({_id: '', name: '', category: '', lessons: []});
 };
